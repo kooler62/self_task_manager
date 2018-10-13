@@ -1,9 +1,13 @@
 <?php
 
 use Faker\Generator as Faker;
+use App\Entities\Project;
 
-$factory->define(Model::class, function (Faker $faker) {
+$factory->define(Project::class, function (Faker $faker) {
     return [
-        //
+        'title' => $faker->sentence($nbWords = 4, $variableNbWords = true),
+        'description' => $faker->text(200),
+        'user_id' => $faker->numberBetween(1, 10),
+        'status' => $faker->randomElement(['opened', 'closed']),
     ];
 });

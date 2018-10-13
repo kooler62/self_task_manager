@@ -11,6 +11,6 @@ class PaymentsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Entities\Payment::class, 500)->create();
     }
 }

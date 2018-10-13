@@ -15,7 +15,12 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('amount');
+            $table->integer('user_id')->unsigned();
+            $table->enum('status', ['pending', 'success', 'error'])->default('pending');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
