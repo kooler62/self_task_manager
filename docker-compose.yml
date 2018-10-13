@@ -8,21 +8,19 @@ services:
       - /data
       - /var/lib/mysql
 
-  redis:
-    image: redis:3.0.7
-    container_name: "laravel_redis"
-    ports:
-      - "6379:6379"
-    volumes_from:
-      - data
-
   mysql:
     image: mysql
     container_name: "laravel_mysql"
     ports:
       - "3306:3306"
-    env_file:
-      - ./docker/mysql/.env
+    #env_file:
+    #  - ./docker/mysql/.env
+    environment:
+      #- "MYSQL_DATABASE=laravel"
+      #- "MYSQL_USER=root"
+    #  - "MYSQL_PASSWORD=tt"
+      - "MYSQL_ROOT_PASSWORD=root"
+      - "DB_HOST=mysql"
     volumes:
       - ./docker/mysql/newdb.sql:/docker-entrypoint-initdb.d/newdb.sql
     volumes_from:
@@ -54,5 +52,4 @@ services:
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
     depends_on:
       - mysql
-      - redis
     command: /usr/local/sbin/php-fpm --allow-to-run-as-root

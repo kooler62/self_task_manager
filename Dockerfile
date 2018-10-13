@@ -2,7 +2,7 @@ FROM php:7.1-fpm
 
 WORKDIR /app
 
-RUN apt-get update && apt-get install -y gnupg apt-utils && \ 
+RUN apt-get update && apt-get install -y gnupg apt-utils && \
     apt-get install -y nodejs && \
     apt-get install -y git && \
     apt-get install -y libmcrypt-dev \
@@ -13,7 +13,6 @@ RUN apt-get update && apt-get install -y gnupg apt-utils && \
         libicu-dev \
         libjpeg62-turbo-dev \
         libfreetype6-dev \
-        libpng12-dev \
         libbz2-dev \
         libmagickwand-dev && \
     rm -rf /var/lib/apt/lists/*
