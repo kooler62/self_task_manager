@@ -4,4 +4,3 @@
     <p>
         This view is loaded from module: {!! config('users.name') !!}
     </p>
-
