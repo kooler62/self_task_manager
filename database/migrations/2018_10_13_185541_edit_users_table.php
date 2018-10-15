@@ -15,7 +15,7 @@ class EditUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->integer('points')->default(500);
-            $table->string('avatar');
+            $table->string('avatar')->nullable();
         });
     }
 
