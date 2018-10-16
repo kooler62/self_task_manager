@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTasksTable extends Migration
+class CreatePricesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,11 @@ class CreateTasksTable extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create('prices', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->nullable();
-            $table->text('description');
-            $table->integer('project_id')->unsigned();
-            $table->integer('position')->default(0);
-            $table->enum('status', ['backlog', 'in_progress', 'in_testing', 'completed'])->default('backlog');
+            $table->integer('amount')->unsigned();
             $table->timestamps();
-
-            $table->foreign('project_id')->references('id')->on('projects');
         });
     }
 
@@ -33,6 +28,6 @@ class CreateTasksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('prices');
     }
 }

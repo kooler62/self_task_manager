@@ -42,10 +42,13 @@ class TaskController extends Controller
          $request->validate([
             'title' => 'required|min:3|max:255',
              'description' => '',
+             'user_id' => 'integer'
         ]);
 
         $Task->create($request->except('_token'));
-        return redirect()->route('tasks.index');
+        return redirect()->route('projects.show',[
+            'id' => $request->project_id,
+        ]);
     }
 
     /**
@@ -82,16 +85,16 @@ class TaskController extends Controller
 
         $request->validate([
             'title' => 'required|min:3|max:255',
+
         ]);
 
 
-        $Project = new Project();
-        //$request['updated_at'] = Carbon::now();
+        $Task = new Task();
         $data = $request->except(['_token', '_method']);
-        $Project->edit($id, $data);
+        $Task->edit($id, $data);
 
+        return back();
 
-        return redirect()->route('projects.index');
 
     }
 
@@ -101,7 +104,11 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        Project::destroy($id);
-        return redirect()->route('projects.index');
+
+        // проверка на проект или на юзера
+        Task::destroy($id);
+        //редирект на
+        return back();
+        //return redirect()->route('projects.index');
     }
 }

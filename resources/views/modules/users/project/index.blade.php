@@ -1,5 +1,13 @@
+@extends('layouts.app')
 
-<h1>Projects</h1>
+@section('content')
+
+    @if ($errors->has('error'))
+        {{ $errors->first('error') }}
+    @endif
+
+
+    <h1>Projects</h1>
 create project:
 @include('modules.users.project.create_project_form')
 
@@ -8,6 +16,9 @@ create project:
     <a href="{{route('projects.edit', [ 'id' => $project->id ])}}">edit</a>
       {!! Form::open(['method' => 'DELETE', 'route' => ['projects.destroy', $project->id]]) !!}
         <button>Delete</button>
-      {!! Form::close() !!} </td>
+      {!! Form::close() !!}
 @endforeach
 
+    {{ $projects->links() }}
+
+@endsection

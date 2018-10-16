@@ -9,6 +9,6 @@ $factory->define(Task::class, function (Faker $faker) {
         'description' => $faker->text(200),
         'project_id' => $faker->numberBetween(1, 100),
         'position' => $faker->numberBetween(1, 11),
-        'status' => $faker->randomElement(['backlog', 'in_progress', 'in_testing', 'complete']),
+        'status' => $faker->randomElement(['backlog', 'in_progress', 'in_testing', 'completed']),
     ];
 });

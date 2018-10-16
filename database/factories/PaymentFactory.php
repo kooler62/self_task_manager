@@ -7,6 +7,6 @@ $factory->define(Payment::class, function (Faker $faker) {
     return [
         'amount' => $faker->numberBetween(10, 250),
         'user_id' => $faker->numberBetween(1, 10),
-        'status' => $faker->randomElement(['pending', 'success', 'error']),
+        'status' => $faker->randomElement(['pending', 'approved', 'error']),
     ];
 });

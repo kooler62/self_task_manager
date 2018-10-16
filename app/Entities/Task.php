@@ -2,6 +2,8 @@
 
 namespace App\Entities;
 
+use DB;
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
@@ -16,16 +18,23 @@ class Task extends Model
 
     public function create($data)
     {
+        $User = Auth::user();
+        $user_points = $User->points;
+        $task_price = DB::table('prices')->where('title', 'create_task')->first()->amount;
+        if($user_points < $task_price){
+            return back()->withErrors(['error' => ['not enough points']]);
+        }
+        User::find($User->id)->decrement('points', $task_price );
+
         $data['created_at'] = now();
-       // $data['user_id'] = Auth::user()->id;
         DB::table($this->table)->insert($data);
     }
 
-
-
     public function edit($id, $data)
     {
-        DB::table($this->table)->where('id', '=', $id)
+
+
+       DB::table($this->table)->where('id', '=', $id)
             ->update($data);
     }
 }

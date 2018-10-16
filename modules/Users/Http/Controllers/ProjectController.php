@@ -56,7 +56,7 @@ class ProjectController extends Controller
         return view('users::project.show',
             [
                 'project' => Project::find($id),
-                'tasks' => Task::where('project_id', $id)
+                'tasks' => Task::all()->where('project_id', $id)->sortBy('position'),
             ]);
     }
 
