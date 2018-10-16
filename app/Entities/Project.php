@@ -12,7 +12,7 @@ class Project extends Model
     protected $primaryKey = 'id';
 
     public function show_users_project($id){
-       return $this::where('user_id', $id)->paginate(10);
+       return $this::where('user_id', $id)->orderBy('created_at', 'desc')->paginate(10);
     }
 
     public function create($data)
@@ -28,12 +28,11 @@ class Project extends Model
         $data['created_at'] = now();
         $data['user_id'] = $User->id;
         DB::table($this->table)->insert($data);
-
     }
 
     public function edit($id, $data)
     {
-        DB::table($this->table)->where('id', '=', $id)
+        DB::table($this->table)->where('id', $id)
             ->update($data);
     }
 

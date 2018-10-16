@@ -1,0 +1,1 @@
+{{$title}} {{$points_rate}} points

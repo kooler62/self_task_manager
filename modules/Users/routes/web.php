@@ -16,6 +16,7 @@ Route::group(['middleware' => 'web', 'namespace' => 'Modules\Users\Http\Controll
             Route::get('/error', 'PaymentController@error')->name('payment.error');
             Route::get('/success', 'PaymentController@success')->name('payment.success');
             Route::any('/callback', 'PaymentController@callback')->name('payment.callback');
+            Route::get('/test', 'PaymentController@test')->name('payment.test');
         });
 
         Route::group(['prefix' => 'profile'], function () {

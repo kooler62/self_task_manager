@@ -15,7 +15,6 @@ class Task extends Model
         return $this::all()->where('project_id', $id);
     }
 
-
     public function create($data)
     {
         $User = Auth::user();
@@ -32,9 +31,7 @@ class Task extends Model
 
     public function edit($id, $data)
     {
-
-
-       DB::table($this->table)->where('id', '=', $id)
+       DB::table($this->table)->where('id', $id)
             ->update($data);
     }
 }

@@ -4,16 +4,11 @@ namespace Modules\Users\Http\Controllers;
 
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use App\Entities\Project;
-use App\Entities\Task;
 use App\Entities\User;
 class ProfileController extends Controller
 {
-
     public function index(){
-        //аватар
        return view('modules.users.profile.index');
     }
 
@@ -37,7 +32,6 @@ class ProfileController extends Controller
         return redirect()->route('profile');
     }
 
-
     public function update_avatar(Request $request, User $User){
         $request->validate([
             'avatar' => 'image',
@@ -55,8 +49,5 @@ class ProfileController extends Controller
         $User->edit(Auth::user()->id, $data);
         return redirect()->route('profile');
     }
-
-
-
 
 }

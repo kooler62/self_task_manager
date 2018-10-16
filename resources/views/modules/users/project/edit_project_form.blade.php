@@ -7,10 +7,6 @@
     {{ $errors->first('title') }}
 @endif
 
-
-
-
-
 {{ Form::submit('Update') }}
 
 {!! Form::close() !!}

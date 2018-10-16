@@ -52,7 +52,8 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
                                 <br>
-                                <span> points: {{ Auth::user()->points }}</span>
+                                @include('users::components.header')
+
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"

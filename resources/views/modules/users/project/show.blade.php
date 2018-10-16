@@ -29,39 +29,31 @@ create task
 
     @foreach($tasks as $task)
         <tr>
-       @if($task->status == "completed")
-           <td></td>
+            @if($task->status == "backlog")
+                <td>@include('modules.users.task.edit_task_form')</td>
                 <td></td>
                 <td></td>
-                <td> <p style="color: red; display: inline-block; border: 1px solid red">  {{$task->title}}</p></td>
-
-         @elseif($task->status == "in_progress")
-                <td></td> <td>  <p style="color: blue; display: inline-block;">  {{$task->title}}</p></td> <td></td> <td></td>
-
-       @elseif($task->status == "backlog")
-                <td> <p style="color: grey; display: inline-block;">  {{$task->title}}</p></td>
-          <td>
-
-          </td>  <td></td>  <td></td>
-       @elseif($task->status == "in_testing")
-                <td></td> <td></td> <td> <p style="color: green; display: inline-block;">  {{$task->title}}</p></td>  <td></td>
-
+                <td></td>
+            @elseif($task->status == "in_progress")
+                <td></td>
+                <td>@include('modules.users.task.edit_task_form')</td>
+                <td></td>
+                <td></td>
+            @elseif($task->status == "in_testing")
+                <td></td>
+                <td></td>
+                <td>@include('modules.users.task.edit_task_form')</td>
+                <td></td>
+            @elseif($task->status == "completed")
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>@include('modules.users.task.edit_task_form')</td>
            @endif
         </tr>
     @endforeach
 
     </table>
-
-
-@foreach($tasks as $task)
-    @include('modules.users.task.edit_task_form')
-
-    {!! Form::open(['method' => 'DELETE', 'route' => ['tasks.destroy', $task->id]]) !!}
-    <button>Delete</button>
-    {!! Form::close() !!}
-    <br>
-    @endforeach
-
 
 @endsection
 

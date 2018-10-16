@@ -5,9 +5,8 @@
 {{ Form::text('name', Auth::user()->name, [ "class" => "form-control", "placeholder" => "name"]) }}
 
 @if ($errors->has('name'))
-{{ $errors->first('name') }}
+    {{ $errors->first('name') }}
 @endif
-
 
 {{ Form::submit('Change') }}
 

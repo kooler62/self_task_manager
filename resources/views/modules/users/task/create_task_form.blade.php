@@ -8,10 +8,7 @@
     {{ $errors->first('title') }}
 @endif
 
-
-
 {!! Form::hidden('project_id', Request::segment(2)) !!}
-
 
 {{ Form::label('description', 'description') }}
 
@@ -28,15 +25,9 @@
     {{ $errors->first('status') }}
 @endif
 
-
-
 @if ($errors->has('description'))
     {{ $errors->first('description') }}
 @endif
-
-
-
-
 
 {{ Form::submit('Create') }}
 

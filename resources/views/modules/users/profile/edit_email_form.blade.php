@@ -5,7 +5,7 @@
 {{ Form::text('email', Auth::user()->email, [ "class" => "form-control", "placeholder" => "email"]) }}
 
 @if ($errors->has('email'))
-{{ $errors->first('email') }}
+    {{ $errors->first('email') }}
 @endif
 
 {{ Form::submit('Change') }}

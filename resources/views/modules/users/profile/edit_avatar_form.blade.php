@@ -5,7 +5,7 @@
 {{ Form::file('avatar') }}
 
 @if ($errors->has('avatar'))
-{{ $errors->first('avatar') }}
+    {{ $errors->first('avatar') }}
 @endif
 
 {{ Form::submit('Upload') }}

@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
 use App\Entities\Price;
+
 class PricesTableSeeder extends Seeder
 {
 

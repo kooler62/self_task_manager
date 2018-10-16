@@ -2,9 +2,8 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
-
 use DB;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
@@ -13,7 +12,7 @@ class User extends Model
 
     public function edit($id, $data)
     {
-        DB::table($this->table)->where('id', '=', $id)
+        DB::table($this->table)->where('id', $id)
             ->update($data);
     }
 }
