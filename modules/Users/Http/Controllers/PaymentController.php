@@ -4,11 +4,11 @@ namespace Modules\Users\Http\Controllers;
 
 use Auth;
 use Mail;
+use App\Entities\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use App\Entities\User;
-use App\Entities\Payment;
+
 class PaymentController extends Controller
 {
 

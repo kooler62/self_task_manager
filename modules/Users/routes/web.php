@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Auth;
 
+Route::get('/a/users', function (App\Entities\User $user) {
+    dd($user::all());
+});
+
 Route::group(['middleware' => 'web', 'namespace' => 'Modules\Users\Http\Controllers'], function () {
     Auth::routes();
-
 	Route::group(['middleware' => 'auth'], function () {
         Route::resource('projects', 'ProjectController');
         Route::resource('tasks', 'TaskController');
