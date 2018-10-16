@@ -1,5 +1,5 @@
 <a href="{{route('profile')}}">
-    <img src="{{ Auth::user()->avatar}}" alt="avatar" width="50">
+    <img src="/{{ Auth::user()->avatar}}" alt="avatar" width="50">
     {{ Auth::user()->name }}
 </a>
 

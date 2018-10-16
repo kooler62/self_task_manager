@@ -3,11 +3,12 @@
 namespace Modules\Users\Http\Controllers;
 
 use Auth;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
-use App\Entities\Project;
 use App\Entities\Task;
+use App\Entities\Project;
+use Illuminate\Routing\Controller;
+use Modules\Users\Http\Requests\StoreTaskRequest;
+use Modules\Users\Http\Requests\UpdateTaskRequest;
+
 class TaskController extends Controller
 {
     public function index(Task $Task)
@@ -24,16 +25,8 @@ class TaskController extends Controller
         return view('users::task.create');
     }
 
-    public function store(Request $request, Task $Task)
+    public function store(StoreTaskRequest $request, Task $Task)
     {
-         $request->validate(
-             [
-                'title' => 'required|min:3|max:255',
-                'description' => '',
-                'user_id' => 'integer'
-             ]
-         );
-
         $Task->create($request->except('_token'));
         return redirect()->route('projects.show',
             [
@@ -58,15 +51,8 @@ class TaskController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateTaskRequest $request, $id)
     {
-        $request->validate(
-            [
-                'title' => 'required|min:3|max:255',
-
-            ]
-        );
-
         $Task = new Task();
         $data = $request->except(['_token', '_method']);
         $Task->edit($id, $data);
@@ -75,7 +61,6 @@ class TaskController extends Controller
 
     public function destroy($id)
     {
-        // проверка на проект юзера или нет
         Task::destroy($id);
         return back();
     }

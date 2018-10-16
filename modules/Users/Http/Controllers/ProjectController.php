@@ -3,11 +3,12 @@
 namespace Modules\Users\Http\Controllers;
 
 use Auth;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Routing\Controller;
-use App\Entities\Project;
 use App\Entities\Task;
+use App\Entities\Project;
+use Illuminate\Routing\Controller;
+use Modules\Users\Http\Requests\StoreProjectRequest;
+use Modules\Users\Http\Requests\UpdateProjectRequest;
+
 class ProjectController extends Controller
 {
     public function index(Project $Project)
@@ -24,12 +25,8 @@ class ProjectController extends Controller
         return view('users::project.create');
     }
 
-    public function store(Request $request, Project $Project)
+    public function store(StoreProjectRequest $request, Project $Project)
     {
-         $request->validate([
-            'title' => 'required|min:3|max:255',
-        ]);
-
         $Project->create($request->except('_token'));
         return redirect()->route('projects.index');
     }
@@ -50,17 +47,10 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateProjectRequest $request, $id)
     {
-        $request->validate(
-            [
-                'title' => 'required|min:3|max:255',
-            ]
-        );
-
         $Project = new Project();
-        $data = $request->except(['_token', '_method']);
-        $Project->edit($id, $data);
+        $Project->edit($id, $request->except(['_token', '_method']));
         return redirect()->route('projects.index');
     }
 

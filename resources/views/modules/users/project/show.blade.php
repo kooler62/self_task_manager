@@ -22,7 +22,7 @@ create task
         <tr style="border: 1px dotted grey">
             <th>backlog</th>
             <th>in_progress</th>
-            <th>in_testing</th>in_testing
+            <th>in_testing</th>
             <th>completed</th>
         </tr>
 
