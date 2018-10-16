@@ -12,6 +12,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        factory(User::class, 10)->create();
+
         User::insert([
             'name' => 'admin',
             'email' => 'admin@ad.min',
@@ -29,7 +31,5 @@ class UsersTableSeeder extends Seeder
             'avatar' => 'https://www.w3schools.com/w3images/avatar2.png',
             'is_admin' => 0,
         ]);
-
-        factory(User::class, 10)->create();
     }
 }
