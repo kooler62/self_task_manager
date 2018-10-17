@@ -3,7 +3,7 @@
 namespace Modules\Users\Http\Controllers;
 
 use Auth;
-use App\Entities\Task;
+use App\Entities\User;
 use App\Entities\Project;
 use Illuminate\Routing\Controller;
 use Modules\Users\Http\Requests\StoreProjectRequest;
@@ -11,13 +11,10 @@ use Modules\Users\Http\Requests\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
-    public function index(Project $Project)
+    public function index(User $User)
     {
-        return view('users::project.index',
-            [
-                'projects' => $Project->show_users_project(Auth::user()->id),
-            ]
-        );
+        $projects = $User::find(Auth::user()->id)->projects;
+        return view('users::project.index', compact('projects') );
     }
 
     public function create()
@@ -31,13 +28,9 @@ class ProjectController extends Controller
         return redirect()->route('projects.index');
     }
 
-    public function show($id)
+    public function show(Project $project)
     {
-        return view('users::project.show',
-            [
-                'project' => Project::find($id),
-                'tasks' => Task::all()->where('project_id', $id)->sortBy('position'),
-            ]);
+        return view('users::project.show', compact('project'));
     }
 
     public function edit($id)

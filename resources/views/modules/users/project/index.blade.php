@@ -20,6 +20,6 @@ create project:
     <hr>
 @endforeach
 
-    {{ $projects->links() }}
+
 
 @endsection
