@@ -6,16 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    protected $table = 'users';
-    protected $primaryKey = 'id';
-
     public function projects()
     {
-        return $this->hasMany('App\Entities\Project');
+        return $this->hasMany(Project::class);
     }
 
     public function tasks()
     {
-        return $this->hasMany('App\Entities\Task');
+        return $this->hasMany(Task::class);
     }
 }

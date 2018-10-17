@@ -8,16 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    protected $table = 'tasks';
-    protected $primaryKey = 'id';
-
     public function project()
     {
-        return $this->belongsTo('App\Entities\Project');
+        return $this->belongsTo(Project::class);
     }
 
     public function user()
     {
-        return $this->belongsTo('App\Entities\User');
+        return $this->belongsTo(User::class);
     }
 }
