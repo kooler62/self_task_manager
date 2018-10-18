@@ -3,6 +3,7 @@
 namespace Modules\Users\Http\Controllers;
 
 use App\Entities\Project;
+use App\Services\ProjectService;
 use Illuminate\Routing\Controller;
 use App\Repositories\ProjectsRepository;
 use Modules\Users\Http\Requests\StoreProjectRequest;
@@ -10,9 +11,10 @@ use Modules\Users\Http\Requests\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
-    public function __construct(ProjectsRepository $projects)
+    public function __construct(ProjectsRepository $projects, ProjectService $project)
     {
         $this->projects = $projects;
+        $this->project = $project;
     }
 
     public function index()
@@ -26,9 +28,9 @@ class ProjectController extends Controller
         return view('users::project.create');
     }
 
-    public function store(StoreProjectRequest $request, Project $project)
+    public function store(StoreProjectRequest $request)
     {
-        $project->create($request->except('_token'));
+        $this->project->create($request);
         return redirect()->route('projects.index');
     }
 
@@ -46,8 +48,7 @@ class ProjectController extends Controller
 
     public function update(UpdateProjectRequest $request, $id)
     {
-        $Project = new Project();
-        $Project->edit($id, $request->except(['_token', '_method']));
+        $this->project->update($id, $request);
         return redirect()->route('projects.index');
     }
 

@@ -14,8 +14,6 @@ class ProjectsRepository
     }
 
     public function users_projects(){
-        return $this->project->where('user_id', auth()->id())->orderBy('created_at', 'desc')
-            ->get();
-
+        return $this->project->where('user_id', auth()->id())->orderBy('created_at', 'desc')->paginate(10);
     }
 }
