@@ -2,18 +2,22 @@
 
 namespace Modules\Users\Http\Controllers;
 
-use Auth;
-use App\Entities\User;
 use App\Entities\Project;
 use Illuminate\Routing\Controller;
+use App\Repositories\ProjectsRepository;
 use Modules\Users\Http\Requests\StoreProjectRequest;
 use Modules\Users\Http\Requests\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
-    public function index(User $User)
+    public function __construct(ProjectsRepository $projects)
     {
-        $projects = $User::find(Auth::user()->id)->projects;
+        $this->projects = $projects;
+    }
+
+    public function index()
+    {
+        $projects = $this->projects->users_projects();
         return view('users::project.index', compact('projects') );
     }
 
@@ -22,9 +26,9 @@ class ProjectController extends Controller
         return view('users::project.create');
     }
 
-    public function store(StoreProjectRequest $request, Project $Project)
+    public function store(StoreProjectRequest $request, Project $project)
     {
-        $Project->create($request->except('_token'));
+        $project->create($request->except('_token'));
         return redirect()->route('projects.index');
     }
 

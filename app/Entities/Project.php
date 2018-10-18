@@ -2,12 +2,14 @@
 
 namespace App\Entities;
 
-use DB;
-use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    protected $fillable = [
+        'title',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);

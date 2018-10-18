@@ -2,8 +2,6 @@
 
 namespace App\Entities;
 
-use DB;
-use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
