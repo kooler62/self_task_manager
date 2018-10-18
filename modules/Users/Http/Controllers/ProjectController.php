@@ -36,14 +36,21 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
-        return view('users::project.show', compact('project'));
+        if($project->user->id === auth()->id())
+        {
+            return view('users::project.show', compact('project'));
+        }
+        return abort('404');
     }
 
     public function edit($id)
     {
-        return view('users::project.edit',[
-            'project' => Project::find($id),
-        ]);
+        $project = Project::find($id);
+        if($project->user->id === auth()->id())
+        {
+            return view('users::project.edit', compact('project'));
+        }
+        return abort('404');
     }
 
     public function update(UpdateProjectRequest $request, $id)
