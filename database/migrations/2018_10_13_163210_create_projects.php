@@ -16,7 +16,7 @@ class CreateProjects extends Migration
         Schema::create('projects', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->nullable();
-            $table->integer('user_id')->unsigned();
+            $table->unsignedInteger('user_id');
             $table->enum('status', ['opened', 'closed'])->default('opened');
             $table->timestamps();
 

@@ -2,17 +2,17 @@
 
 namespace App\Entities;
 
-use DB;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    protected $table = 'users';
-    protected $primaryKey = 'id';
-
-    public function edit($id, $data)
+    public function projects()
     {
-        DB::table($this->table)->where('id', $id)
-            ->update($data);
+        return $this->hasMany(Project::class);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
     }
 }
