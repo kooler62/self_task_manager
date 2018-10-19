@@ -20,6 +20,6 @@ class ProjectService
     public function update($id, $data){
         $project = Project::find($id);
         $project->title = $data['title'];
-         return $project->save();
+        return $project->save();
     }
 }

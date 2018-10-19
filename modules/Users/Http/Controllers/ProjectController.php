@@ -3,6 +3,7 @@
 namespace Modules\Users\Http\Controllers;
 
 use App\Entities\Project;
+use Illuminate\Support\Facades\Gate;
 use App\Services\ProjectService;
 use Illuminate\Routing\Controller;
 use App\Repositories\ProjectsRepository;
@@ -36,18 +37,15 @@ class ProjectController extends Controller
 
     public function show(Project $project)
     {
-        if($project->user->id === auth()->id())
-        {
+        if (Gate::allows('own-project', $project)) {
             return view('users::project.show', compact('project'));
         }
         return abort('404');
     }
 
-    public function edit($id)
+    public function edit(Project $project)
     {
-        $project = Project::find($id);
-        if($project->user->id === auth()->id())
-        {
+        if (Gate::allows('own-project', $project)) {
             return view('users::project.edit', compact('project'));
         }
         return abort('404');
@@ -59,12 +57,11 @@ class ProjectController extends Controller
         return redirect()->route('projects.index');
     }
 
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        $project = Project::find($id);
-        if($project->user->id === auth()->id())
+        if (Gate::allows('own-project', $project))
         {
-            $project->destroy($id);
+            Project::destroy($project->id);
             return redirect()->route('projects.index');
         }
         return abort('404');
