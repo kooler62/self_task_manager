@@ -10,38 +10,10 @@ class ProjectPolicy
 {
     use HandlesAuthorization;
 
-
-    public function __construct()
-    {
-        //
-    }
-
-    public function test_f()
-    {
-        return false;
-        //return $user->id === $post->user_id;
-    }
-
-    public function test_t()
+    public function show(User $user, Project $project)
     {
         return true;
-        //return $user->id === $post->user_id;
+        //return false;
+        //return $user->id == $project->user_id;
     }
-
-    public function show(User $user)
-    {
-
-        dd($user);
-        return false;
-        //return $user->id === $post->user_id;
-    }
-
-    public function show2(User $user, Project $project)
-    {
-        return false;
-        //return $user->id === $post->user_id;
-    }
-
-
-
 }
