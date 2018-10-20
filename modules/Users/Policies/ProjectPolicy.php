@@ -12,7 +12,15 @@ class ProjectPolicy
 
     public function show(User $user, Project $project)
     {
-        return true;
+      //  dd(55);
+        return false;
+        //return false;
+        //return $user->id == $project->user_id;
+    }
+    public function update(User $user, Project $project)
+    {
+       // dd(55);
+        return false;
         //return false;
         //return $user->id == $project->user_id;
     }

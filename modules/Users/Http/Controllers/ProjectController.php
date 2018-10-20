@@ -14,15 +14,15 @@ use Modules\Users\Http\Requests\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
-    public function __construct(ProjectsRepository $projects, ProjectService $project)
+    public function __construct(ProjectsRepository $projectsRepo, ProjectService $projectService)
     {
-        $this->projects = $projects;
-        $this->project = $project;
+        $this->projectsRepo = $projectsRepo;
+        $this->projectService = $projectService;
     }
 
     public function index()
     {
-        $projects = $this->projects->users_projects();
+        $projects = $this->projectsRepo->users_projects();
         return view('users::project.index', compact('projects') );
     }
 
@@ -33,20 +33,22 @@ class ProjectController extends Controller
 
     public function store(StoreProjectRequest $request)
     {
-        $this->project->create($request);
+        $this->projectService->create($request);
         return redirect()->route('projects.index');
     }
 
     public function show(Project $project)
     {
-        dd($this->authorizeForUser(auth()->user(),'show', $project));
-        dd( $this->authorize('show'));
+        $user = User::find(2);
+        dd( $this->authorize($user, $project));
 
         # return view('users::project.show', compact('project'));
     }
 
     public function edit(Project $project)
-    {/*
+    {
+        return view('users::project.edit', compact('project'));
+        /*
         if (Gate::allows('own-project', $project)) {
             return view('users::project.edit', compact('project'));
         }
@@ -55,7 +57,9 @@ class ProjectController extends Controller
 
     public function update(UpdateProjectRequest $request, $id)
     {
-        $this->project->update($id, $request);
+        $user = User::find(2);
+        dd($request->authorize($user, 'update', $request));
+        $this->projectService->update($id, $request);
         return redirect()->route('projects.index');
     }
 
